@@ -22,8 +22,8 @@
    - Testing different different data and features
   2. Development
    - Unit, integration, and acceptance tests
-   - Differential tests
-   - Benchmark tests
+   - Differential tests - checks model accuracy from one version to the next
+   - Benchmark tests - checks model accuracy against a simple benchmark
    - Load tests
   3. Production Environment
     - Shadow mode testing
@@ -151,5 +151,85 @@ allowed_loss_functions:
   - huber
   ```
     
+## Unit Tests
+Data Engineering - reduce risk of bugs in processing/fecture engineering code
+Input Data Tests - catch unexpected inputs, typically througha schema
+
+A schema is a collection of rules which specify the expected values for a set of fields. Below we show a simple schema (just using a nested dictionary) for the Iris dataset.(data validation). The schema specifies the maximum and minimum values that can be taken by each variable. We can learn these values from the dataor these values may come from specific domain knowledge of the subject.
+
+```py
+
+# View summary statistics for our dataframe.
+iris_frame.describe()
+
+ris_schema = {
+    'sepal length': {
+        'range': {
+            'min': 4.0,  # determined by looking at the dataframe .describe() method
+            'max': 8.0
+        },
+        'dtype': float,
+    },
+    'sepal width': {
+        'range': {
+            'min': 1.0,
+            'max': 5.0
+        },
+        'dtype': float,
+    },
+    'petal length': {
+        'range': {
+            'min': 1.0,
+            'max': 7.0
+        },
+        'dtype': float,
+    },
+    'petal width': {
+        'range': {
+            'min': 0.1,
+            'max': 3.0
+        },
+        'dtype': float,
+    }
+}
+
+import unittest
+import sys
+
+class TestIrisInputData(unittest.TestCase):
+    def setUp(self):
+        
+        # `setUp` will be run before each test, ensuring that you
+        # have a new pipeline to access in your tests. See the 
+        # unittest docs if you are unfamiliar with unittest.
+        # https://docs.python.org/3/library/unittest.html#unittest.TestCase.setUp
+        self.pipeline = SimplePipeline()
+        self.pipeline.run_pipeline()
     
-  
+    def test_input_data_ranges(self):
+        # get df max and min values for each column
+        max_values = self.pipeline.frame.max()
+        min_values = self.pipeline.frame.min()
+        
+        # loop over each feature (i.e. all 4 column names)
+        for feature in self.pipeline.feature_names:
+            
+            # use unittest assertions to ensure the max/min values found in the dataset
+            # are less than/greater than those expected by the schema max/min.
+            self.assertTrue(max_values[feature] <= iris_schema[feature]['range']['max'])
+            self.assertTrue(min_values[feature] >= iris_schema[feature]['range']['min'])
+            
+    def test_input_data_types(self):
+        data_types = self.pipeline.frame.dtypes  # pandas dtypes method
+        
+        for feature in self.pipeline.feature_names:
+            self.assertEqual(data_types[feature], iris_schema[feature]['dtype'])
+
+# setup code to allow unittest to run the above tests inside the jupyter notebook.
+suite = unittest.TestLoader().loadTestsFromTestCase(TestIrisInputData)
+unittest.TextTestRunner(verbosity=1, stream=sys.stderr).run(suite)            
+```
+
+Config Tests - reduce the risk of errors in our system configuration
+Model Quality Test - reduce the risk sudden and gradual drops in model quality
+
