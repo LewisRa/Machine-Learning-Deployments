@@ -32,7 +32,9 @@
     - Logging & Tracing
     - Alerting
     
-    ## Why Test? 
+    
+    
+ ## Why Test? 
 Testing is the way we show our system functionality is what we expect it to be, even as we make changes to the system
   1.  Confidence
    - Analyzing data provided by monitoring historic system behavior (past relablity)
@@ -241,5 +243,54 @@ unittest.TextTestRunner(verbosity=1, stream=sys.stderr).run(suite)
 # Integration Testing the ML API
 
 Our Integration Tests will check functionality across our API & Model Components
+
+## Tests before Production
+- Units
+- Integration Tests
+- Static Analysis
+- Acceptence Tests
+- BDD Tests
+- Benchmark Tests
+- Load Tests
+- UI Tests
+- SenPen Tests
+- Soak Tests
+- Differential Tests
+
+## Tests after Production
+#### Deploy
+- Shadow Mode
+- Load Tests
+- Config Tests
+#### Release 
+- Canary Release
+- Monitoring 
+- Feature Flagging
+#### Post Release
+- Logs/events
+- Monitoring
+- Tracing
+- A/B Tests
+- Auditing/Analysis
+- SenPen Tests
+    
+### Deployment vs Release
+Deployments need not be exposed to customers while releases do. For example, the difference between shadow mode and canary release is that shadow mode has no effect on customers while in canary releases,  you release your system yo a limited subset to users.
+
+# Shadow Mode Deployment
+Shadow mode is needed because it is extreme difficult to completely replicate the production environment in the testing environment because of several reasons including: 
+- seasonality changes
+- customer trends
+- market forces
+- external systems
+- changes to the API
+- contracts
+- data structures
+
+#### How Shadow Mode Works 
+
+At the application level, the incoming prediction requests are performed by our current model and that same prediction requests is also
+sent to our shadow model where the prediction is saved but not served back to the customer and all the logic for handling this is done in code by triggering it through a feature flag 
+
 
 
