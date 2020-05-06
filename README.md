@@ -1,4 +1,4 @@
-# Machine-Learning-Deployments
+   # Machine-Learning-Deployments
 
 ## ML System Lifecycle (tests)
 - Traditional tests
@@ -152,8 +152,11 @@ allowed_loss_functions:
   ```
     
 ## Unit Tests
-Data Engineering - reduce risk of bugs in processing/fecture engineering code
-Input Data Tests - catch unexpected inputs, typically througha schema
+### Data Engineering 
+- reduce risk of bugs in processing/fecture engineering code
+
+### Input Data Tests 
+- catch unexpected inputs, typically througha schema
 
 A schema is a collection of rules which specify the expected values for a set of fields. Below we show a simple schema (just using a nested dictionary) for the Iris dataset.(data validation). The schema specifies the maximum and minimum values that can be taken by each variable. We can learn these values from the dataor these values may come from specific domain knowledge of the subject.
 
@@ -230,6 +233,13 @@ suite = unittest.TestLoader().loadTestsFromTestCase(TestIrisInputData)
 unittest.TextTestRunner(verbosity=1, stream=sys.stderr).run(suite)            
 ```
 
-Config Tests - reduce the risk of errors in our system configuration
-Model Quality Test - reduce the risk sudden and gradual drops in model quality
+### Config Tests 
+- reduce the risk of errors in our system configuration
+### Model Quality Test
+- reduce the risk sudden and gradual drops in model quality
+
+# Integration Testing the ML API
+
+Our Integration Tests will check functionality across our API & Model Components
+
 
