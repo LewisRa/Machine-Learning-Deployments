@@ -1,5 +1,5 @@
    # Machine-Learning-Deployments
-
+"The degree of a system's observability is the degree to which it can be debugged"
 ## ML System Lifecycle (tests)
 - Traditional tests
   - Unit tests
@@ -293,6 +293,40 @@ At the application level, the incoming prediction requests are performed by our 
 sent to our shadow model where the prediction is saved but not served back to the customer and all the logic for handling this is done in code by triggering it through a feature flag.However you do need to think about your data model if you're going to capture predictions and pass system to disk either in a database or in your logs.You need a way to distinguish between those shadow and life predictions so that you can effectively run queries as needed.
 
 A more complex way to do a shadow deployment is at the infrastructure level. Shadow prediction requests are forked at the infrastructure level and traffic is routed to two different versions of our API or potentially two different API endpoints. Doing this in a micro services environment can be challenging and tends to require a more mature dev ops setup. If you haven't considered that possibility reasons to use an infrastructure level shadow deployment include your application your machine learning application being a black box that you're simply unable to change. You may have created a prototype in a slower language like Python and you're looking to test it before you go ahead with a rewrite in a faster language like C or C++ or your feature flagging system may be so riddled with technical debt that adding an additional flag to your application is actually less appealing than making infrastructure changes.
+# ML Monitioring
+1. Operational -is it working
+   - Latencies
+   - Memory size
+   - CPU
+2. Are the predictions accurate (Model Outputs)
+3. Is the data what is expected (Model Inputs)
 
+#### 3 components of montioring system
+ 1.Processing and Storage
+ 2. Visualization
+ 3. Alerting
+
+## Alerting 
+Responsive component of a monitoring system that performs actions based on changes in metric values and definitions are composed of two components a metrics based condition or threshold and an action to perform when the values fall outside of the acceptable conditions.
+Examples: 
+ - A feature becoming unavailable
+ - Shifts in distribution of ket input values
+ - Patterns specific to your model
+ - Decrease in performance
+3 Key Aspects of Alerting
+- Notify -define situations that make sense to activate manage
+- Automate - programmatic responses can be triggered based on threshold violations 
+- Triage - Distinctions in alert severity depending on the scale of the problem - teams or individuals can be notified using methods appropriate to the scale of the problem. For example rising utilization of storage might warrant a ticket or an email whereas an increase in client facing error rates or unresponsiveness might require sending a page to on call staff in the middle of the night
+
+
+## Model Input monitoring
+## Distribution monitoring
+## Monitoring Logs and Metrics
+While metrics showed tendencies and patterns of a service or application logs focus on specific events.
+
+The purpose of logs is to preserve as much information mostly technical as possible on a specific occurrence.The information in logs can then be used to investigate incidents and to help with Root Cause Analysis of false hope bugs.
+
+# Distributed Tracing
+A represenaation of a series of causally related distibuted events that encode the end to end request flow through a distributed system
 
 
