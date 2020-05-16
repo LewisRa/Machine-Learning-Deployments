@@ -123,7 +123,7 @@ The session establishes all conversations with the database and it's a regular P
 
 ## Models.py
 Classes *LassoModelPredictions* and *GradientBoostingModelPredictions* represents a database tables of predictions. *LassoModelPredictions* for the live trained model and *GradientBoostingModelPredictions* for the shadow model. Both use base class from core.py(sqlalchemy)
-```
+```py
 from sqlalchemy import Column, String, DateTime, Integer
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
