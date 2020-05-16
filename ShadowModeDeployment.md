@@ -19,3 +19,21 @@ sent to our shadow model where the prediction is saved but not served back to th
 A more complex way to do a shadow deployment is at the infrastructure level. Shadow prediction requests are forked at the infrastructure level and traffic is routed to two different versions of our API or potentially two different API endpoints. Doing this in a micro services environment can be challenging and tends to require a more mature dev ops setup. If you haven't considered that possibility reasons to use an infrastructure level shadow deployment include your application your machine learning application being a black box that you're simply unable to change. You may have created a prototype in a slower language like Python and you're looking to test it before you go ahead with a rewrite in a faster language like C or C++ or your feature flagging system may be so riddled with technical debt that adding an additional flag to your application is actually less appealing than making infrastructure changes.
 
 ####  There are many data checks on some statistical tests that we can implement during shuttle deployment to highlight if there are differences between the data that we use to train the model and live data
+- Values Checks - Allowed values
+- Values Checks - Value range
+- Values Checks - Missing values
+- Distribution Checks - Basic statistics (Mean, median, SD, Max, Min)
+- Distribution Checks - Statistical tests between trained and live data (numeriCal variables)
+  - If the variables are normally distributed (t-tests or anova)
+  - If the variables are NOTnormally distributed (t-tests or anova). We could use non parametric tests like Kruskal-Wallis
+- Distribution Checks - Statistical tests between trained and live data (categorical variables)
+  -ChiSquare
+- Distribution Checks - Statistical tests between trained and live data (sparse variables)
+  - Most values are zeros (Bag of words)
+  - Non-zero values : % training vs live data (ChiSquare)
+- Model Performance - Statistics
+  - Accuracy, Percison and recall, ROC-AUC
+  - MSE, RMSE, MAEM ,....
+  - Predictions distribution
+- Model Performance - Bespoke population
+  - Model data slices where performance is especially unportant ot where model might perform poorly. Use understanding of the data to identify data slices of interest. Compare model metrics for data slices against the metric for your data set. 
