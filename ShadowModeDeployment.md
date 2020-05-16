@@ -37,3 +37,10 @@ A more complex way to do a shadow deployment is at the infrastructure level. Sha
   - Predictions distribution
 - Model Performance - Bespoke population
   - Model data slices where performance is especially unportant ot where model might perform poorly. Use understanding of the data to identify data slices of interest. Compare model metrics for data slices against the metric for your data set. 
+  
+  In app.py under testing-and-monitoring-ml-deployments/packages/ml_api/api/
+  ```py
+  
+    # Setup database
+    init_database(flask_app, config=config_object, db_session=db_session)
+  ```
