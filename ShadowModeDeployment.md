@@ -45,8 +45,8 @@ A more complex way to do a shadow deployment is at the infrastructure level. Sha
     init_database(flask_app, config=config_object, db_session=db_session)
   ```
   
-  #### Setting up the db uses the Persistence directory
-  #### Using core.py
+  #### Setting up the db uses the Persistence directory. We are using PostGres. 
+  ## Core.py
   
   ```py
   import logging
@@ -115,3 +115,160 @@ def run_migrations():
     alembicArgs = ["--raiseerr", "upgrade", "head"]
     alembic.config.main(argv=alembicArgs)
   ```
+You can work with the core which wotk with SQL more directly or you can use the object reational mapping abstraction layer which allows us to define our database and columns in code. 
+
+### Sessions:
+The session establishes all conversations with the database and it's a regular Python class which can be directly instantiated in any database queries persisted within the session. **It seems to be like closing down sql at the end of the work day and it clears all temp tables, for example.** Session.begin() begins a transaction on this session and session.close() closes current session by clearing all items and ending any transaction in progress. 
+
+
+## Models.py
+Classes *LassoModelPredictions* and *GradientBoostingModelPredictions* represents a database tables of predictions. *LassoModelPredictions* for the live trained model and *GradientBoostingModelPredictions* for the shadow model. Both use base class from core.py(sqlalchemy)
+```
+from sqlalchemy import Column, String, DateTime, Integer
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.sql import func
+
+from api.persistence.core import Base
+
+
+class LassoModelPredictions(Base):
+    __tablename__ = "regression_model_predictions"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(36), nullable=False)
+    datetime_captured = Column(
+        DateTime(timezone=True), server_default=func.now(), index=True
+    )
+    model_version = Column(String(36), nullable=False)
+    inputs = Column(JSONB)
+    outputs = Column(JSONB)
+
+
+class GradientBoostingModelPredictions(Base):
+    __tablename__ = "gradient_boosting_model_predictions"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(36), nullable=False)
+    datetime_captured = Column(
+        DateTime(timezone=True), server_default=func.now(), index=True
+    )
+    model_version = Column(String(36), nullable=False)
+    inputs = Column(JSONB)
+    outputs = Column(JSONB)
+```
+
+## Data_access.py
+
+```py
+import enum
+import json
+import logging
+import typing as t
+
+import numpy as np
+import pandas as pd
+from regression_model.predict import make_prediction as make_live_prediction
+from sqlalchemy.orm.session import Session
+
+from api.persistence.models import (
+    LassoModelPredictions,
+    GradientBoostingModelPredictions,
+)
+from gradient_boosting_model.predict import make_prediction as make_shadow_prediction
+
+_logger = logging.getLogger('mlapi')
+
+
+SECONDARY_VARIABLES_TO_RENAME = {
+    "FirstFlrSF": "1stFlrSF",
+    "SecondFlrSF": "2ndFlrSF",
+    "ThreeSsnPortch": "3SsnPorch",
+}
+
+
+class ModelType(enum.Enum):
+    LASSO = "lasso"
+    GRADIENT_BOOSTING = "gradient_boosting"
+
+
+class PredictionResult(t.NamedTuple):
+    errors: t.Any
+    predictions: np.array
+    model_version: str
+
+
+MODEL_PREDICTION_MAP = {
+    ModelType.GRADIENT_BOOSTING: make_shadow_prediction,
+    ModelType.LASSO: make_live_prediction,
+}
+
+
+class PredictionPersistence:
+    def __init__(self, *, db_session: Session, user_id: str = None) -> None:
+        self.db_session = db_session
+        if not user_id:
+            # in reality, here we would use something like a UUID for anonymous users
+            # and if we had user logins, we would record the user ID.
+            self.user_id = "007"
+
+    def make_save_predictions(
+        self, *, db_model: ModelType, input_data: t.List
+    ) -> PredictionResult:
+        """Get the prediction from a given model and persist it."""
+        # Access the model prediction function via mapping
+        if db_model == ModelType.LASSO:
+            # we have to rename a few of the columns for backwards
+            # compatibility with the regression model package.
+            live_frame = pd.DataFrame(input_data)
+            input_data = live_frame.rename(
+                columns=SECONDARY_VARIABLES_TO_RENAME
+            ).to_dict(orient="records")
+
+        result = MODEL_PREDICTION_MAP[db_model](input_data=input_data)
+        errors = None
+        try:
+            errors = result["errors"]
+        except KeyError:
+            # regression model `make_prediction` does not include errors
+            pass
+
+        prediction_result = PredictionResult(
+            errors=errors,
+            predictions=result.get("predictions").tolist() if not errors else None,
+            model_version=result.get("version"),
+        )
+
+        if prediction_result.errors:
+            return prediction_result
+
+        self.save_predictions(
+            inputs=input_data, prediction_result=prediction_result, db_model=db_model
+        )
+
+        return prediction_result
+
+    def save_predictions(
+        self,
+        *,
+        inputs: t.List,
+        prediction_result: PredictionResult,
+        db_model: ModelType,
+    ) -> None:
+        """Persist model predictions to storage."""
+        if db_model == db_model.LASSO:
+            prediction_data = LassoModelPredictions(
+                user_id=self.user_id,
+                model_version=prediction_result.model_version,
+                inputs=json.dumps(inputs),
+                outputs=json.dumps(prediction_result.predictions),
+            )
+        else:
+            prediction_data = GradientBoostingModelPredictions(
+                user_id=self.user_id,
+                model_version=prediction_result.model_version,
+                inputs=json.dumps(inputs),
+                outputs=json.dumps(prediction_result.predictions),
+            )
+
+        self.db_session.add(prediction_data)
+        self.db_session.commit()
+        _logger.debug(f"saved data for model: {db_model}")
+```
