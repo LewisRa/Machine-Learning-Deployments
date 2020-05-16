@@ -115,7 +115,7 @@ def run_migrations():
     alembicArgs = ["--raiseerr", "upgrade", "head"]
     alembic.config.main(argv=alembicArgs)
   ```
-You can work with the core which wotk with SQL more directly or you can use the object reational mapping abstraction layer which allows us to define our database and columns in code. 
+You can work with the core (base model) which work with SQL more directly or you can use the object reational mapping abstraction layer which allows us to define our database and columns in code(what we are using here)
 
 ### Sessions:
 The session establishes all conversations with the database and it's a regular Python class which can be directly instantiated in any database queries persisted within the session. **It seems to be like closing down sql at the end of the work day and it clears all temp tables, for example.** Session.begin() begins a transaction on this session and session.close() closes current session by clearing all items and ending any transaction in progress. 
