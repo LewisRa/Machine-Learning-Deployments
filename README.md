@@ -282,6 +282,12 @@ Our Integration Tests will check functionality across our API & Model Components
 2. Are the predictions accurate (Model Outputs)
 3. Is the data what is expected (Model Inputs)
 
+#### 3 Pillars of Observability
+1. Logs (timestamp, payload) 
+ - 3 types: plain text, json, binary (logs in protoype format)
+2. Metrics
+3. Distributed Tracing- tracking event logs flows through a distributed system (very few ML monitoring uses)
+
 #### 3 components of montioring system
  1.Processing and Storage
  2. Visualization
