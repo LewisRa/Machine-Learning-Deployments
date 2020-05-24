@@ -45,7 +45,6 @@ Using the Expresssion search bar, choose 'http_request_count_total'
 ```rate(http_request_count_total[1m]) = average rate of increase per second```
  ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMetrics3.PNG)
 
-
 ```
 http_request_latency_seconds_count = count for different endpoints 
 
