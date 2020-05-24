@@ -39,7 +39,19 @@ localhost:9090 = web ui for prometheus
 Using the Expresssion search bar, choose 'http_request_count_total'
 ```
  ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMetrics1.PNG)
-rate(http_request_count_total[1m])
+
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMetrics2.PNG)
+ 
+rate(http_request_count_total[1m]) = average rate of increase per second
+ ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMetrics3.PNG)
+rate(http_request_count_total[5m])
+
+http_request_latency_seconds_count = count for different endpoints 
+
+http_request_latency_seconds_sum = total amount of time spent in these different endpoints
+
+rate(http_request_latency_seconds_sum[1m])/rate(http_request_latency_seconds_count[1m])
+= average latency over the last minute 
 ## Adding Grafana
 ## Infrastructure Metrics
 ## Adding ML Metrics Monitoring 
