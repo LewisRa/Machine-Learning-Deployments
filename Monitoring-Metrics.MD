@@ -31,4 +31,16 @@ models become less accurate less useful as time goes on. Metrics are central and
 **One of the simplest things we can do is to look at the score distribution produced by the model.If that distribution changes surprisingly there is a good chance that there is an important change tothe input to the model reflecting some change in the outside world or the system.**
 
 ---
+## Prometheus and Grafana
+## Basic Setup
+## Adding Metrics
+```
+localhost:9090 = web ui for prometheus
+Using the Expresssion search bar, choose 'http_request_count_total'
+```
 
+rate(http_request_count_total[1m])
+## Adding Grafana
+## Infrastructure Metrics
+## Adding ML Metrics Monitoring 
+## Creating an ML System
