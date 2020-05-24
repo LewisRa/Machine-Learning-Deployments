@@ -38,7 +38,7 @@ models become less accurate less useful as time goes on. Metrics are central and
 localhost:9090 = web ui for prometheus
 Using the Expresssion search bar, choose 'http_request_count_total'
 ```
- ![](AddingMetrics.png)
+ ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMetrics1.PNG)
 rate(http_request_count_total[1m])
 ## Adding Grafana
 ## Infrastructure Metrics
