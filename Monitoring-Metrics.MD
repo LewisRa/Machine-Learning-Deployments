@@ -100,6 +100,13 @@ def create_app():
  ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/infrastructuremetrics.PNG)
 
 ## Adding ML Metrics Monitoring 
+
+#### Adding ml_api GET/200 and ml_api/v1/predictions/regression 200 endpoints to Requests Rate and Latency dashboard
+
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMLmetrics.PNG)
+
+## Creating an ML System Grafana Dashboard
+
 ```
 from gradient_boosting_model import __version__ as shadow_version
 from regression_model import __version__ as live_version
@@ -122,11 +129,31 @@ if anomaly:
             if anomaly:
                 print('Created 1 anomaly')
 ...
+```
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/CreatingaMLsystemDashboard.PNG)
+```
+Average House Price Prediction Amount(USD) = 
+sum(rate(house_price_prediction_dollars_sum{job="ml_api"}[1m]))/
+sum(rate(house_price_prediction_dollars_count{job="ml_api"}[1m]))
 
+Average House Price Prediction Rate(/second)=
+rate(house_price_prediction_dollars_count{job="ml_api"}[1m])
+
+Standard Error of the Mean(SEM) =
+avg_over_time(house_price_gauge_dollars[1m]) (AVG)
+
+stdev_over_time(house_price_gauge_dollars[1m]) (STD)
+
+stdev_over_time(house_price_gauge_dollars[1m])/(sqrt(count_over_time(house_price_prediction_dollars_count[1m]))) (SEM)
+
+Z-Score = (avg_over_time(house_price_gauge_dollars[1m])-avg_over_time(house_price_gauge_dollars[1w])) / stdev_over_time(house_price_gauge_dollars[1w]) 
+
+Min Prediction = house_price_gauge_dollars
 
 ```
-#### Adding ml_api GET/200 and ml_api/v1/predictions/regression 200 endpoints to Requests Rate and Latency dashboard
+#### Z-score - if the z scores goes to a high number or a negative number, it indicates that the average value in the more recent time frame is dipping multiple standard deviations above or below the long term average. And this would indicate that something is going wrong with our model.
 
-![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMLmetrics.PNG)
+### With --anomaly
 
-## Creating an ML System Grafana Dashboard
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/CreatingaMLsystemDashboard-withOutlier.PNG)
+```
