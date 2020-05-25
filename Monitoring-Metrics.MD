@@ -140,10 +140,8 @@ Average House Price Prediction Rate(/second)=
 rate(house_price_prediction_dollars_count{job="ml_api"}[1m])
 
 Standard Error of the Mean(SEM) =
-avg_over_time(house_price_gauge_dollars[1m]) (AVG)
-
-stdev_over_time(house_price_gauge_dollars[1m]) (STD)
-
+avg_over_time(house_price_gauge_dollars[1m])---(AVG)---
+stdev_over_time(house_price_gauge_dollars[1m])---(STD)---
 stdev_over_time(house_price_gauge_dollars[1m])/(sqrt(count_over_time(house_price_prediction_dollars_count[1m]))) (SEM)
 
 Z-Score = (avg_over_time(house_price_gauge_dollars[1m])-avg_over_time(house_price_gauge_dollars[1w])) / stdev_over_time(house_price_gauge_dollars[1w]) 
