@@ -19,7 +19,7 @@ Metrics could be low level usage summaries provided by the operating system or t
 
 2. Cardinality challenges -  cardinality is the number of elements of the sets (Amount of data)  and using high cardinality values like user I.D. as metric labels can overwhelm time series databases. All popular existing time series database solutions suffer performance on the high cardinality labeling. 
 
-3. Scoped tot a single system
+3. Scoped to a single system
 
 
 
@@ -34,10 +34,9 @@ models become less accurate less useful as time goes on. Metrics are central and
 ## Prometheus and Grafana
 ## Basic Setup
 ## Adding Metrics
+
+#### exercise_notebooks/prometheus_exercise/app/flask_app.py 
 ```
-#exercise_notebooks/prometheus_exercise/app/flask_app.py 
- 
- 
 import prometheus_client
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
