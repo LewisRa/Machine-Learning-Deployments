@@ -127,4 +127,4 @@ if anomaly:
 ```
 #### Adding ml_api GET/200 and ml_api/v1/predictions/regression 200 endpoints to Requests Rate and Latency dashboard
 
-![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMLMetrics.PNG)
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMLmetrics.PNG)
