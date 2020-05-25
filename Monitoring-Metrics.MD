@@ -55,6 +55,13 @@ rate(http_request_latency_seconds_sum[1m])/rate(http_request_latency_seconds_cou
 ```
 
 ## Adding Grafana
+```
+rate(http_request_count_total{job="webapp"}[1m])
+
+rate(http_request_latency_seconds_sum[1m])/rate(http_request_latency_seconds_count[1m])
+= average latency over the last minute
+```
+ ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingGrafana1.PNG)
 ## Infrastructure Metrics
 ## Adding ML Metrics Monitoring 
 ## Creating an ML System
