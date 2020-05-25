@@ -100,6 +100,31 @@ def create_app():
  ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/infrastructuremetrics.PNG)
 
 ## Adding ML Metrics Monitoring 
+```
+from gradient_boosting_model import __version__ as shadow_version
+from regression_model import __version__ as live_version
+from prometheus_client import Histogram, Gauge, Info
+from api.config import APP_NAME
+...
+def populate_database(n_predictions: int = 500, anomaly: bool = False) -> None:
 
 
-## Creating an ML System
+if anomaly:
+        # set extremely low values to generate an outlier
+        n_predictions = 1
+        clean_inputs_df.loc[:, "FirstFlrSF"] = 1
+        clean_inputs_df.loc[:, "LotArea"] = 1
+        clean_inputs_df.loc[:, "OverallQual"] = 1
+        clean_inputs_df.loc[:, "GrLivArea"] = 1
+
+    for index, data in clean_inputs_df.iterrows():
+        if index > n_predictions:
+            if anomaly:
+                print('Created 1 anomaly')
+...
+
+
+```
+#### Adding ml_api GET/200 and ml_api/v1/predictions/regression 200 endpoints to Requests Rate and Latency dashboard
+
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/AddingMLMetrics.PNG)
