@@ -147,7 +147,7 @@ stdev_over_time(house_price_gauge_dollars[1m])/(sqrt(count_over_time(house_price
 Z-Score = (avg_over_time(house_price_gauge_dollars[1m])-avg_over_time(house_price_gauge_dollars[1w])) / stdev_over_time(house_price_gauge_dollars[1w]) 
 
 Min Prediction = house_price_gauge_dollars
-
+Max Prediction = house_price_gauge_dollars
 ```
 #### Z-score - if the z scores goes to a high number or a negative number, it indicates that the average value in the more recent time frame is dipping multiple standard deviations above or below the long term average. And this would indicate that something is going wrong with our model.
 
