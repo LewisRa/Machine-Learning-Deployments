@@ -35,6 +35,42 @@ models become less accurate less useful as time goes on. Metrics are central and
 ## Basic Setup
 ## Adding Metrics
 ```
+#exercise_notebooks/prometheus_exercise/app/flask_app.py 
+ 
+ 
+import prometheus_client
+from flask import Flask
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from app.helpers.middleware import setup_metrics
+
+
+def index():
+    return 'home'
+
+
+def foo():
+    return 'foo'
+
+
+def create_app():
+    main_app = Flask(__name__)
+    main_app.add_url_rule('/', 'index', index)
+    main_app.add_url_rule('/foo', 'foo', foo)
+    setup_metrics(main_app)
+
+    # Add prometheus wsgi middleware to route /metrics requests
+    app = DispatcherMiddleware(main_app.wsgi_app, {
+        '/metrics': prometheus_client.make_wsgi_app()
+    })
+    app = DispatcherMiddleware(
+        app=main_app.wsgi_app,
+        mounts={'/metrics': prometheus_client.make_wsgi_app()}
+    )
+
+    return app
+```
+
+```
 localhost:9090 = web ui for prometheus
 Using the Expresssion search bar, choose 'http_request_count_total'
 ```
