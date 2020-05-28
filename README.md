@@ -53,6 +53,76 @@ Testing is the way we show our system functionality is what we expect it to be, 
  - Training is Reproducible (Setting Random Seed, etc)
  - Integration Test the Pipeline
  
+ 
+ ## Requirements.txt
+ #### gradient_boosting_model
+```
+# ML requirements
+numpy>=1.18.1,<1.19.0
+scikit-learn>=0.22.1,<0.23.0
+pandas>=0.25.3,<0.26.0
+feature_engine>=0.3.1,<0.4.0
+joblib>=0.14.1,<0.15.0
+
+# config parsing
+strictyaml>=1.0.5,<1.1.0
+pydantic>=1.1,<1.2
+
+# validation
+marshmallow>=3.2.2,<4.0
+
+# packaging
+setuptools>=41.4.0,<42.0.0
+wheel>=0.33.6,<0.34.0
+```
+#### ML api
+```
+# ML Model
+tid-gradient-boosting-model>=0.1.18,<0.2.0
+
+# Old model
+tid-regression-model>=2.0.20,<2.1.0
+
+# Web microframework for the API
+flask>=1.1.1,<1.2.0
+connexion[swagger-ui]>=2.5.1,<2.6.0
+
+# repo maintenance tooling
+black>=19.10b0,<20.0
+flake8>=3.7.9,<4.0
+mypy>=0.740
+
+# Persistence
+sqlalchemy>=1.3.11,<1.4.0  # ORM
+psycopg2>=2.8.4,<2.9.0  # DB Driver
+alembic>=1.3.1,<1.4.0  # DB Migrations
+sqlalchemy_utils>=0.36.0,<0.37.0  # DB Utils
+
+# Metrics
+prometheus_client>=0.7.1,<0.8.0
+
+# Logging
+python3-logstash>=0.4.80,<0.5.0
+python-json-logger>=0.1.11,<0.2.0
+
+# Deployment
+gunicorn>=20.0.4,<20.1.0
+###################################################################################3
+
+
+# testing requirements
+pytest>=5.3.2,<6.0.0
+requests>=2.22.0,<2.23.0
+
+# repo maintenance tooling
+black>=19.10b0,<20.0
+flake8>=3.7.9,<4.0
+mypy>=0.740
+
+# diff test tooling
+termcolor==1.1.0
+yarl==1.3.0
+```
  .....................
  ## Code Base Overview
  
