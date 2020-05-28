@@ -125,7 +125,7 @@ yarl==1.3.0
 ```
  .....................
  ## Code Base Overview
- 
+ set-up alawys you to publish gradient_boosting_model package
   
   ```# Package Overview
 package_name: gradient_boosting_model
