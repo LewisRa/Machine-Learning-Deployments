@@ -90,5 +90,5 @@ gsutil cat gs://$DEVSHELL_PROJECT_ID/accommodation.csv
 ```
 
 # Loading Data from Google Cloud Storage into Cloud SQL tables
-# Explore Cloud SQL data
+# Explore Cloud SQL data 
 # Generating housing recommendations with Machine Learning using Cloud Dataproc
