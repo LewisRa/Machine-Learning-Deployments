@@ -204,3 +204,7 @@ def validate_inputs(
 - packages/gradient_boosting_model/tests/test_pipeline.py
 
 #### drop_na_inputs not used? 
+
+## preprocessor.py 
+
+#### http://www.ashukumar27.io/sklearn_pipelines/
