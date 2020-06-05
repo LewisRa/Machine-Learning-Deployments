@@ -213,3 +213,14 @@ def validate_inputs(
 #### http://www.ashukumar27.io/sklearn_pipelines/
 
 ## errors.py
+---
+
+
+## 1. Build Pipeline - testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/gradient_boosting_model/pipeline.py
+
+- numerical_imputer
+ - config.model_config.numerical_vars
+- categorical_imputer
+ -config.model_config.categorical_vars
+- temporal_variable (preprocessor.py)
+ -
