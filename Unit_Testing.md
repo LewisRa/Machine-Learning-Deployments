@@ -208,3 +208,5 @@ def validate_inputs(
 ## preprocessor.py 
 
 #### http://www.ashukumar27.io/sklearn_pipelines/
+
+## errors.py
