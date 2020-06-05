@@ -198,6 +198,9 @@ def validate_inputs(
 
     return validated_data, errors
 ```
+
+### testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/gradient_boosting_model/config/core.py /
+### testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/gradient_boosting_model/config.yml
 #### Validate_inputs
 - packages/gradient_boosting_model/gradient_boosting_model/predict.py
 - testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/tests/test_validation.py
