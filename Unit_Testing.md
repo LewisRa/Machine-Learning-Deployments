@@ -220,16 +220,22 @@ def validate_inputs(
 
 - numerical_imputer
   - variables=config.model_config.numerical_vars
+
 - categorical_imputer
   - variables=config.model_config.categorical_vars
+
 - temporal_variable (preprocessor.py) ##Calculates the time difference between 2 temporal variables.
    - variables=config.model_config.temporal_vars,
    - reference_variable=config.model_config.drop_features,
+
 - rare_label_encoder ##RareLabelCategoricalEncoder() groups infrequent categories altogether into one new category called ‘Rare’ or a different string indicated by the user. (from feature_engine.categorical_encoders import RareLabelCategoricalEncoder)
   - tol=config.model_config.rare_label_tol,
   - n_categories=config.model_config.rare_label_n_categories,
   - variables=config.model_config.categorical_vars,
+
 - categorical_encoder
+
 - drop_features
   - variables_to_drop=config.model_config.drop_features
+
 - gb_model
