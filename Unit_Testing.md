@@ -219,8 +219,17 @@ def validate_inputs(
 ## 1. Build Pipeline - testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/gradient_boosting_model/pipeline.py
 
 - numerical_imputer
- - config.model_config.numerical_vars
+  - variables=config.model_config.numerical_vars
 - categorical_imputer
- -config.model_config.categorical_vars
+  - variables=config.model_config.categorical_vars
 - temporal_variable (preprocessor.py)
- -
+   - variables=config.model_config.temporal_vars,
+   - reference_variable=config.model_config.drop_features,
+- rare_label_encoder
+  - tol=config.model_config.rare_label_tol,
+  - n_categories=config.model_config.rare_label_n_categories,
+  - variables=config.model_config.categorical_vars,
+- categorical_encoder
+- drop_features
+  - variables_to_drop=config.model_config.drop_features
+- gb_model
