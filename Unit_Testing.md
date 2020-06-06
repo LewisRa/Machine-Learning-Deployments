@@ -74,6 +74,16 @@ deps =
 exclude = .git,env
 max-line-length = 90
 ```
+
+### Run train_pipeline without tox and pytest
+```
+python3
+x=3 
+locals()  will give you a dictionary of local variables--> x:3
+globals() will give you a dictionary of global variables--> x:3
+dir() will give you the list of in scope variables--> x
+```
+
 ## DataManagement.py
 ```
 import pandas as pd
