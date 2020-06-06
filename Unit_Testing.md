@@ -224,7 +224,7 @@ def validate_inputs(
 - categorical_imputer
   - variables=config.model_config.categorical_vars
 
-- temporal_variable (preprocessor.py) ##Calculates the time difference between 2 temporal variables.
+- temporal_variable (preprocessor.py) ##Calculates the time difference between 2 temporal variables. **Subtract the differences in years from YearRemodAdd (Remodel date) and YrSold(Feature to be dropped) and replace data in YearRemodAdd with those differences **
    - variables=config.model_config.temporal_vars,
    - reference_variable=config.model_config.drop_features,
 
