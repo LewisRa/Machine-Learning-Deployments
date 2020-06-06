@@ -1,15 +1,9 @@
  # Unit Testing a Production ML Model
 ## tox.ini
 
-```diff
-regular
-- text in red
-+ text in green
-! text in orange
-# text in gray
-```
+
 In testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/ run: 
-```
+```diff
 tox 
 tox > toxOutput.txt
 ```
@@ -36,9 +30,9 @@ commands=
     unzip -o gradient_boosting_model/datasets/house-prices-advanced-regression-techniques.zip -d gradient_boosting_model/datasets
     mv gradient_boosting_model/datasets/train.csv gradient_boosting_model/datasets/houseprice.csv
     python gradient_boosting_model/train_pipeline.py
-    pytest \
-          -s \
-          -vv \
+   - pytest \
+    -      -s \
+     -     -vv \
           {posargs:tests/}
 
 
