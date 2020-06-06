@@ -1,5 +1,13 @@
  # Unit Testing a Production ML Model
 ## tox.ini
+
+```diff
+regular
+- text in red
++ text in green
+! text in orange
+# text in gray
+```
 In testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/ run: 
 ```
 tox 
