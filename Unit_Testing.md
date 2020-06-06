@@ -3,11 +3,11 @@
 
 
 In testing-and-monitoring-ml-deployments/packages/gradient_boosting_model/ run: 
-```diff
+```
 tox 
 tox > toxOutput.txt
 ```
-```
+```diff
 [tox]
 envlist = unit_tests,typechecks,stylechecks
 skipsdist = True
