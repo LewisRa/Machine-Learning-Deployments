@@ -9,11 +9,11 @@ tox > toxOutput.txt
 ```
 ```diff
 [tox]
-envlist = unit_tests,typechecks,stylechecks
+- envlist = unit_tests,typechecks,stylechecks
 skipsdist = True
 
 
-[testenv]
+-[testenv]
 install_command = pip install {opts} {packages}
 deps =
     -rtest_requirements.txt
@@ -33,10 +33,10 @@ commands=
 - pytest \
 -     -s \
 -     -vv \
-          {posargs:tests/}
+-          {posargs:tests/}
 
 
-[testenv:unit_tests]
+-[testenv:unit_tests]
 envdir = {toxworkdir}/unit_tests
 deps =
      {[testenv]deps}
@@ -46,28 +46,28 @@ setenv =
 
 commands =
      python gradient_boosting_model/train_pipeline.py
-     pytest \
-           -s \
-           -vv \
-           {posargs:tests/}
+-     pytest \
+-           -s \
+-           -vv \
+-           {posargs:tests/}
 
 
-[testenv:typechecks]
+-[testenv:typechecks]
 envdir = {toxworkdir}/unit_tests
 
 deps =
      {[testenv:unit_tests]deps}
 
-commands = {posargs:mypy gradient_boosting_model}
+-commands = {posargs:mypy gradient_boosting_model}
 
 
-[testenv:stylechecks]
+-[testenv:stylechecks]
 envdir = {toxworkdir}/unit_tests
 
 deps =
      {[testenv:unit_tests]deps}
 
-commands = {posargs:flake8 gradient_boosting_model tests}
+-commands = {posargs:flake8 gradient_boosting_model tests}
 
 
 [flake8]
