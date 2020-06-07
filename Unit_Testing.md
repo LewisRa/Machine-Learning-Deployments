@@ -29,7 +29,7 @@ commands=
     kaggle competitions download -c house-prices-advanced-regression-techniques -p gradient_boosting_model/datasets/
     unzip -o gradient_boosting_model/datasets/house-prices-advanced-regression-techniques.zip -d gradient_boosting_model/datasets
     mv gradient_boosting_model/datasets/train.csv gradient_boosting_model/datasets/houseprice.csv
-    python gradient_boosting_model/train_pipeline.py
+-    python gradient_boosting_model/train_pipeline.py
 - pytest \
 -     -s \
 -     -vv \
@@ -77,6 +77,9 @@ max-line-length = 90
 
 ### Run train_pipeline without tox and pytest
 ```
+
+pip install .
+....
 python3
 x=3 
 locals()  will give you a dictionary of local variables--> x:3
