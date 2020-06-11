@@ -25,7 +25,7 @@ passenv =
 
 setenv =
   PYTHONPATH=.
-
+c
 commands=
     kaggle competitions download -c house-prices-advanced-regression-techniques -p gradient_boosting_model/datasets/
     unzip -o gradient_boosting_model/datasets/house-prices-advanced-regression-techniques.zip -d gradient_boosting_model/datasets
