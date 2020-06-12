@@ -133,6 +133,43 @@ def test_inputs_df():
 
 **The app fixture which calls our create app factory function from app.py file to instantiate a connection app that passing in a test configuration from the config module**
 
+## Flask:app.test_client() as client 
+
+Passing flask app, in client function(fixture), you can test flask app endpoints! For example:
+```py
+# contents from routes.py
+
+from flask import request
+import json
+
+
+def configure_routes(app):
+
+    @app.route('/')
+    def hello_world():
+        return 'Hello, World!'
+  ```
+  
+  ```py
+ # contents from test_routes.py
+ 
+from flask import Flask
+import json
+
+from flask_pytest_example.handlers.routes import configure_routes
+
+
+def test_base_route():
+    app = Flask(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url = '/'
+
+    response = client.get(url)
+    assert response.get_data() == b'Hello, World!'
+    assert response.status_code == 200
+  ```
+
 ## test_api.py
 - @pytest.mark.integration
   def test_health_endpoint(client)
