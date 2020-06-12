@@ -131,6 +131,8 @@ def test_inputs_df():
     return test_inputs_df.copy(deep=True)
 ```
 
+**The app fixture which calls our create app factory function from app.py file to instantiate a connection app that passing in a test configuration from the config module**
+
 ## test_api.py
 - @pytest.mark.integration
   def test_health_endpoint(client)
