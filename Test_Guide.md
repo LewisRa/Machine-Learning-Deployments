@@ -83,6 +83,9 @@ This test makes sure that if we have any missing config fields we also raise a v
 
 # Differential Testing
 # API and Integration Testing
+
+### parameterizationa allows us to try many combinations of data within the same test, see the pytest docs for details 
+
 ```
 @pytest.fixture(scope='session')
 def _db():
@@ -160,3 +163,19 @@ def test_inputs_df():
     )
  
 - test_prediction_data_saved(client, app, test_inputs_df)
+
+## test_back_to_back_models.py
+- @pytest.mark.differential
+  def test_model_prediction_differentials(client)
+  
+  
+
+## test_persistence.py
+- @pytest.mark.parametrize(
+        "model_type, model,",
+        (
+            (ModelType.GRADIENT_BOOSTING, GradientBoostingModelPredictions),
+            (ModelType.LASSO, LassoModelPredictions),
+        ),
+        )
+        def test_data_access(model_type, model, test_inputs_df)
