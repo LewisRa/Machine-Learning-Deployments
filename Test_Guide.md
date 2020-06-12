@@ -196,6 +196,19 @@ def test_base_route():
 -  test_prediction_endpoint(
     api_endpoint, expected_no_predictions, client, test_inputs_df
     )
+    
+ **expected_no_predictions = expected number of predictions i.e 1451 rows for regression model and 1457 rows for the gradient boosting models**
+ 
+ 
+ **response = client.post(api_endpoint, json=test_inputs_df.to_dict(orient="records"))**
+This line posts an HTTP post request to our V1 predictions endpoint passing in  the test data as a JSON file (python dictionary)
+then we inspect our response to ensure not only that there are no errors but that the length of the predictions matches the expected output length.
+```diff
+ assert response.status_code == 200
+    data = json.loads(response.data)
+-    assert data["errors"] is None
+    assert len(data["predictions"]) == expected_no_predictions
+```
 
 - test_prediction_validation(
     field, field_value, index, expected_error, client, test_inputs_df
