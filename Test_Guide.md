@@ -215,7 +215,38 @@ then we inspect our response to ensure not only that there are no errors but tha
 - test_prediction_validation(
     field, field_value, index, expected_error, client, test_inputs_df
     )
+
+```
+@pytest.mark.parametrize(
+    "field, field_value, index, expected_error",
+    (
+        (
+            "BldgType",
+            1,  # expected str
+            33,
+            {"33": {"BldgType": ["Not a valid string."]}},
+        ),
+        (
+            "GarageArea",  # model feature
+            "abc",  # expected float
+            45,
+            {"45": {"GarageArea": ["Not a valid number."]}},
+        ),
+        (
+            "CentralAir",
+            np.nan,  # nan not allowed
+            34,
+            {"34": {"CentralAir": ["Field may not be null."]}},
+        ),
+        ("LotArea", "", 2, {"2": {"LotArea": ["Not a valid integer."]}}),
+    ),
+)
+```
+For example: This code is specifying that at index 33 we're setting the BldgType = 1 and then based on that, when we call post with that test input data frame. Thus, we expect that the data we get back matches this expected error {"33": {"BldgType": ["Not a valid string."]} 
  
+ **test_prediction_validation** is essentially an integration test for the unit test:test_validate_inputs_identifies_errors(sample_input_data):
+
+
 - test_prediction_data_saved(client, app, test_inputs_df)
 
 ## test_back_to_back_models.py
