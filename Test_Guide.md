@@ -210,6 +210,8 @@ then we inspect our response to ensure not only that there are no errors but tha
     assert len(data["predictions"]) == expected_no_predictions
 ```
 
+**test_prediction_endpoint** is essentially an integration test for the unit test:test_validate_inputs(sample_input_data):
+
 - test_prediction_validation(
     field, field_value, index, expected_error, client, test_inputs_df
     )
