@@ -81,7 +81,7 @@ This test makes sure that if we have any missing config fields we also raise a v
 - test_validate_inputs(sample_input_data)
 - test_validate_inputs_identifies_errors(sample_input_data)
 
-# Differential Testing
+
 # API and Integration Testing
 
 ### parameterizationa allows us to try many combinations of data within the same test, see the pytest docs for details 
@@ -247,12 +247,14 @@ For example: This code is specifying that at index 33 we're setting the BldgType
  **test_prediction_validation** is essentially an integration test for the unit test:test_validate_inputs_identifies_errors(sample_input_data):
 
 
-- test_prediction_data_saved(client, app, test_inputs_df)
+- test_prediction_data_saved(client, app, test_inputs_df) (shadow mode deployment testing)
 
-## test_back_to_back_models.py
+## test_back_to_back_models.py ( Differential Testing)
 - @pytest.mark.differential
   def test_model_prediction_differentials(client)
-  
+ 
+ Using testing-and-monitoring-ml-deployments/packages/ml_api/differential_tests/compare.py, this test compares the regresssion and gradient boosting models.  We just pass in the first 10 rows as the two models' validation differs which means they filter out a slightly different number of rows which would cause the differential tests to fail. The tolerence level can be set to the level of variation desired.      
+
   
 
 ## test_persistence.py
@@ -264,3 +266,6 @@ For example: This code is specifying that at index 33 we're setting the BldgType
         ),
         )
         def test_data_access(model_type, model, test_inputs_df)
+        
+        
+
