@@ -1,3 +1,7 @@
+# Test Guide
+
+## pytest -s                  # disable all capturing
+
 # Unit Testing
 
 ## conftest.py	
