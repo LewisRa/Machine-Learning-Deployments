@@ -1,3 +1,15 @@
+# Data Science Positions
+1. Product Analyst/ Product Data scientist
+  - Analysts user data to create reports for product managers
+  - Typically use coding as main tool but can use Tableau/Qlik
+2. Business Analyst/ Business Inytelligence 
+  - Creating insigts and analysis for business data (usually use Tableau and Excel)
+3. ML Engineer 
+  - custom ML models to fit company
+  - very technical
+4. Data Engineeer
+  - Technical role to build data pipelines
+# Recommendation Systems Lab
 You are in charge of migrating your company's existing machine learning workload for housing. Recommendations from your on premises had do cluster to the cloud organizations happy with the current model. But the underlying infrastructure on premise is costing them headaches to tune and utilize efficiently. You're CTO wants as little friction as possible from your existing Hadoop on Promise Infrastructure, but has heard of the advantages that cloud solutions offer for auto scaling and serverrless management. 
 
 - Create a Cloud sequel instance and populate the tables. 
