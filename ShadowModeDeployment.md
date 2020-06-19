@@ -343,4 +343,7 @@ script.py.mako - This is a Mako template file which is used to generate new migr
  alembic revision -m "create organization table"
   ```
   Output: Generatring h/migrations/versions/1975ea83b712_create_organization_table.py...done
-  This command creates a python file.
+  
+  This command creates a python file.: 
+  
+  Don't forget to add organization
