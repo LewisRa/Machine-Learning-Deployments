@@ -337,7 +337,8 @@ script.py.mako - This is a Mako template file which is used to generate new migr
  ```
  alembic init alembic
  ```
- 
+ #### Configuring alembic.ini
+ ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicConfig.PNG)
  #### Creating a Migration
  ```
  alembic revision -m "create organization table"
