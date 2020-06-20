@@ -362,12 +362,25 @@ organization table.
 
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify.PNG)
 
- 3. Define for all of our existing groups  to an organization that they belong to so that no
+
+3. Define for all of our existing groups  to an organization that they belong to so that no
 group is allowed to be without an organization.
 
 
-![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify2.PNG)
-
-
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify3.PNG)
+
+- 3.1
+Since we're using the organization model and the  group model, it might be tempting to import from our
+existing models in our code like above but that is a big mistake. 
+
+Since the organization model and the group model may change over time right those are not
+necessarily static and this migration
+assumes that those models look a certain
+way it 
+
+Because importing the current organization and group modelassumes that they have certain
+columns and in two years from now those columns might not actually exist in those models and we always want our migration or migration script should work for years to come. We should be able
+to two years from now revert this migration if we want to. In order to do that, we define
+our models inside of this migration and this will ensure that we can run this migration script in two or three years
+
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify4.PNG)
