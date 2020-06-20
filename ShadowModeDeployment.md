@@ -351,20 +351,23 @@ script.py.mako - This is a Mako template file which is used to generate new migr
 
 #### For example,  we're adding a new organization table and the concept of organizations into our database 
 
+1. Add the organization table into our database 
 
 
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicCreate2.PNG)
 
-1. Add the organization table into our database 
+2. Define a relationship between the existing groups table and the new
+organization table.
+
 
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify.PNG)
 
-2. Define a relationship between the existing groups table and the new
-organization table 
+ 3. Define for all of our existing groups  to an organization that they belong to so that no
+group is allowed to be without an organization.
+
 
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify2.PNG)
-3. Define for all of our existing groups  to an organization that they belong to so that no
-group is allowed to be without an organization.
+
 
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify3.PNG)
 ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify4.PNG)
