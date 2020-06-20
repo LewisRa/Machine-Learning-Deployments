@@ -346,5 +346,10 @@ script.py.mako - This is a Mako template file which is used to generate new migr
   Output: Generatring h/migrations/versions/1975ea83b712_create_organization_table.py...done
   
   This command creates a python file.: 
-  
+  ![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicCreate.PNG)
   Don't forget to add organization
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicCreate2.PNG)
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify.PNG)
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify2.PNG)
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify3.PNG)
+![](https://github.com/LewisRa/Machine-Learning-Deployments/blob/master/markdownImages/alembicModify3.PNG)
