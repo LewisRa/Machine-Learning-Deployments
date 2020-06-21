@@ -23,7 +23,10 @@ ENV PYTHONPATH "${PYTHONPATH}:/opt/app/"
 ADD . /opt/app
 WORKDIR /opt/app
 ```
-
+#### make - make is a utility for building and maintaining groups of programs (and other types of files) from source code.
+#### The libffi library is useful to anyone trying to build a bridge between interpreted and natively compiled code. Some notable users include CPython 
+#### curl for swagger which UI allows anyone — be it your development team or your end consumers — to visualize and interact with the API’s resources without having any of the implementation logic in place. 
+#### libpq-dev =Header files and static library for compiling C programs to link with the libpq library in order to communicate with a PostgreSQL database backend. 
 ```diff
 version: '3'
 services:
