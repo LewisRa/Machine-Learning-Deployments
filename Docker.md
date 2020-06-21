@@ -1,7 +1,7 @@
 # Shadow Mode ML Code - Analyse Results
 
 ## Docker - Production
-``` 
+```diff
 FROM python:3.7.5-slim-buster
 
 RUN mkdir -p /opt/app
@@ -14,8 +14,8 @@ RUN apt-get update -y && \
  	apt-get install -y libffi-dev gcc && \
  	# for swagger
  	apt-get install -y curl && \
- 	# for postgres driver
- 	apt-get install -y libpq-dev
+ 	# for postgres driver(only need this download when we are running our API container but not for tests)
+> 	apt-get install -y libpq-dev
 
 RUN pip install -r /opt/app/requirements/requirements.txt
 ENV PYTHONPATH "${PYTHONPATH}:/opt/app/"
@@ -40,7 +40,7 @@ services:
     depends_on:
       - database
     ports:
-      - "5000:5000"   # expose webserver to localhost host:container
+>      - "5000:5000"   # expose webserver to localhost host:container
     command: bash -c "make db-migrations && make run-service-development"
 
   database:
@@ -110,7 +110,7 @@ services:
       POSTGRES_DB: ml_api_test
     ports:
       # expose postgres container on different host port to default (host:container)
-      - "6608:5432"
+>      - "6608:5432"
     volumes:
       - my_dbdata_test:/var/lib/postgresql/test_data
 
