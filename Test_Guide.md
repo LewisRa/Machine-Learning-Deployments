@@ -132,6 +132,11 @@ def test_inputs_df():
     test_inputs_df = load_dataset(file_name="test.csv")
     return test_inputs_df.copy(deep=True)
 ```
+**_db replaces  Development config database with Testing config database fot testing
+- from api.config import DevelopmentConfig as user_config
+- database_url = os.environ.get("ALEMBIC_DB_URI", user_config.SQLALCHEMY_DATABASE_URI)
+- IN
+- testing-and-monitoring-ml-deployments/packages/ml_api/alembic/env.py**
 
 **The app fixture which calls our create app factory function from app.py file to instantiate a connection app that passing in a test configuration from the config module**
 
