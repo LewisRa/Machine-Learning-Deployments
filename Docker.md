@@ -1,5 +1,18 @@
 # Shadow Mode ML Code - Analyse Results
 
+Docker containers wrap a pieceof softwarein a complete **file system** (think Linux filesystem) that containes everything needed to run
+- code
+- runtime
+- system tools
+- system libraries 
+- **everything that can be install on a server**
+
+In other words, you can imagine Docker as small little servers that are running in your laptop that containes everything need to run operating system and program. (Application server vs database server)
+
+Container include the application and all of its dependencies but share the kernel with other containers runnin as isolated proceses in **user space** on the host operation system
+
+Docker is effiicent because it shares the kernel betweem containers
+
 ## Docker - Production
 ```diff
 FROM python:3.7.5-slim-buster
