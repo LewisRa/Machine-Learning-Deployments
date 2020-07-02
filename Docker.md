@@ -11,8 +11,31 @@ In other words, you can imagine Docker as small little servers that are running 
 
 Container include the application and all of its dependencies but share the kernel with other containers runnin as isolated proceses in **user space** on the host operation system
 
-Docker is effiicent because it shares the kernel betweem containers
+Docker is efficcent because it shares the kernel between containers
 
+## docker ps - all running containers
+## docker ps -a - all available containers
+## docker images - all avaiable containers
+## Foreground vs background container
+The difference between foreground containers can be accessed right after it is started. In other words, you can interact with foreground containers
+
+- The -v flag mounts a local container on the container
+- The -i flag means there is an interative communications channel to that container
+- The -t means there is a terminal open to that container
+- The -d flag means the container is a detached or background container. (daemon)
+- The -p flag allows you to pass in  a port  to the local container (which is port 80) and map port 80 back to the local host  so we can hit the web server from our browser in the laptop(localhost:80).
+
+``` docker run -it ubantu:16:04 **/bin/bash**
+(open up terminal in container to be interactive with  through localhost--- the terminal automatically opens up?)
+exit (to shut docker down using open ubantu terminal)
+```
+```
+docker run -d -p 80:80 --webserver nginx
+...
+docker stop webserver
+```
+
+## When specifying the roost user credentials for mysql container if you are usiing docker compose
 ## Docker - Production
 ```diff
 FROM python:3.7.5-slim-buster
