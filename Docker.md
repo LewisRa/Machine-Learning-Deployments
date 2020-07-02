@@ -13,12 +13,16 @@ Container include the application and all of its dependencies but share the kern
 
 Docker is efficcent because it shares the kernel between containers
 
+A Docker file is a text file that creates some instructions  on how to create the container. The command you run to make create an image from the Docker file is **docker build** ---------------------> A Docker image is a binary file that lives in your in your file system and it's basically the blueprint of the  container you want to run so it has all the say the instructions and the and the components required to build that container. For a Docker image to  to become a an actual container that you can run, you should run the command **docker run**. Docker run convert image  to an actual container like an actual server.  --------------------->  Now you have a Docker container. The very first time you start  the container are you going to use **docker run <image> ** because the container is being executed against an image. After the first, you can use **docker start** and **docker stop**
+
+To remove docker images: docker rmi <image>
+To remove docker containers: docker rm <container>
+
 ## docker ps - all running containers
 ## docker ps -a - all available containers
-## docker images - all avaiable containers
+## docker images - all available images
 ## Foreground vs background container
-The difference between foreground containers can be accessed right after it is started. In other words, you can interact with foreground containers
-
+A foreground container is a container that starts the process and attaches the console or your terminal to thE container's process/bash/terminal.So, a foreground container is a container that you can interact with in real time. Then you have background containers which are associated with deamons (like deamon scripts). If you sny yo interact with background container, **docker exec** may help temporaily allow you to run container terminal.The difference between foreground containers can be accessed right after it is started. 
 - The -v flag mounts a local container on the container
 - The -i flag means there is an interative communications channel to that container
 - The -t means there is a terminal open to that container
