@@ -30,7 +30,7 @@ The difference between foreground containers can be accessed right after it is s
 exit (to shut docker down using open ubantu terminal)
 ```
 ```
-docker run -d -p 80:80 --webserver nginx
+docker run -d -p 80:80 --webserver nginx (nginx is now running as a deammon or a background service until you shut down down)
 ...
 docker stop webserver
 ```
