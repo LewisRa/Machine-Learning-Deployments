@@ -39,6 +39,34 @@ docker run -d -p 80:80 --webserver nginx (nginx is now running as a deammon or a
 docker stop webserver
 ```
 
+#### On laptop
+```
+mkdir /opt/app/docker-hello-flask
+
+cd /opt/docker-hello-flask
+touch hello.py
+atom .
+```
+```
+from flask import Flask
+app =  Flask(__name__)
+
+@app.route('/')
+def hello_world():
+ return 'Hello World'
+```
+
+```
+Flask==0.11
+```
+```
+
+FROM python:3.7.5-slim-buster
+
+
+```
+
+---
 ## When specifying the roost user credentials for mysql container if you are usiing docker compose
 ## Docker - Production
 ```diff
