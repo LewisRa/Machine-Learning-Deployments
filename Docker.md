@@ -113,6 +113,16 @@ WORKDIR /opt/app
 #### The libffi library is useful to anyone trying to build a bridge between interpreted and natively compiled code. Some notable users include CPython 
 #### curl for swagger which UI allows anyone — be it your development team or your end consumers — to visualize and interact with the API’s resources without having any of the implementation logic in place. 
 #### libpq-dev =Header files and static library for compiling C programs to link with the libpq library in order to communicate with a PostgreSQL database backend. 
+
+#### PYTHONPATH is how to import custom python files/modules: https://www.youtube.com/watch?v=A7E18apPQJs
+#### How do you add a path to PYTHONPATH in a Dockerfile: https://stackoverflow.com/questions/49631146/how-do-you-add-a-path-to-pythonpath-in-a-dockerfile
+import sys
+sys.path
+create enviroment variables PYTHONPATH = /opt/app/ so that python will run .py files in opt/app/ like modules. 
+#### ENV PYTHONPATH "${PYTHONPATH}:/your/custom/path"
+
+
+
 ```diff
 version: '3'
 services:
