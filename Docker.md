@@ -47,6 +47,7 @@ cd /opt/docker-hello-flask
 touch hello.py
 atom .
 ```
+#### hello.py
 ```
 from flask import Flask
 app =  Flask(__name__)
@@ -55,29 +56,34 @@ app =  Flask(__name__)
 def hello_world():
  return 'Hello World'
 ```
-
+#### requirements.txt
 ```
 Flask==0.11
 ```
+#### DOCKERFILE
 ```
-
 FROM python:3.7.5-slim-buster
 
 RUN mkdir /opt/hello/-app
 
 WORKDIR /opt/hello-app
-ADD requirements.txt . 
+ADD requirements.txt . (requirements.txt and copy it to the working directory of the docker image that is being built ON LAPTOP.)
 
-ADD ..
+ADD .. (Means take everything from the working directory where the docker build command is issued ON LAPTOP and copy it to the current working directory of the docker image.
 
 EXPOSE 5000
 
-ENV FLASK_APP=hello.py
+ENV FLASK_APP=hello.py (way for flask to look for flask application when you flask run)
 
 CMD["flask", "run", "--host", "0.0.0.0"]
 
 ```
-
+#### On laptop
+```
+docker build -t hello-app . 
+docker images
+docker run -d -p 5000:5000 --name hello-server hello-app
+```
 ---
 ## When specifying the roost user credentials for mysql container if you are usiing docker compose
 ## Docker - Production
