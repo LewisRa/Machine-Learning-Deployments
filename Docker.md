@@ -1,4 +1,4 @@
-# Shadow Mode ML Code - Analyse Results
+# Docker
 
 Docker containers wrap a pieceof softwarein a complete **file system** (think Linux filesystem) that containes everything needed to run
 - code
@@ -39,13 +39,20 @@ docker run -d -p 80:80 --webserver nginx (nginx is now running as a deammon or a
 docker stop webserver
 ```
 
-#### On laptop
-```
-mkdir /opt/app/docker-hello-flask
-
-cd /opt/docker-hello-flask
-touch hello.py
-atom .
+---
+## Basic Flask App
+- Just using python hello.py
+- Write the Dockerfile
+- Build the image with docker build -t hello-app .
+- Run the container with docker run -d -p 5000:5000 --name hello-server hello-app
+- Check that the container is running
+- Go to localhost:5000. You should see Hello, World!
+- Stop the container using docker stop hello-server
+- Check that the container is not running with docker ps
+- Check the container is still available with docker ps -a
+- You can restart the server using docker start hello-server
+- You can log in to the server using docker exec -it hello-server bash
+- Caveat: if you change the code, it's not reflected on the container. We'll fix that next.
 ```
 #### hello.py
 ```
@@ -62,30 +69,36 @@ Flask==0.11
 ```
 #### DOCKERFILE
 ```
-FROM python:3.7.5-slim-buster
+FROM python:3.4.5-slim
 
-RUN mkdir /opt/hello/-app
+## make a local directory
+RUN mkdir /opt/hello_app
 
-WORKDIR /opt/hello-app
-ADD requirements.txt . (requirements.txt and copy it to the working directory of the docker image that is being built ON LAPTOP.)
+# set "hello_app" as the working directory from which CMD, RUN, ADD references
+WORKDIR /opt/hello_app
 
-ADD .. (Means take everything from the working directory where the docker build command is issued ON LAPTOP and copy it to the current working directory of the docker image.
+# copy the local requirements.txt to the /hello_app directory
+ADD requirements.txt .
 
+# pip install the local requirements.txt
+RUN pip install -r requirements.txt
+
+# now copy all the files in this directory to /hello_app directory
+ADD . .
+
+# Listen to port 5000 at runtime
 EXPOSE 5000
 
-ENV FLASK_APP=hello.py (way for flask to look for flask application when you flask run)
+# Environment variable that sets default app to be run by Flask
+ENV FLASK_APP=hello.py
 
-CMD["flask", "run", "--host", "0.0.0.0"]
+# Define our command to be run when launching the container
+CMD ["flask", "run", "--host", "0.0.0.0"]
 
-```
-#### On laptop
-```
-docker build -t hello-app . 
-docker images
-docker run -d -p 5000:5000 --name hello-server hello-app
-```
+
 ---
-## When specifying the roost user credentials for mysql container if you are usiing docker compose
+## When specifying the root user credentials for mysql container if you are using docker compose
+--
 ## Docker - Production
 ```diff
 FROM python:3.7.5-slim-buster
