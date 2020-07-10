@@ -21,6 +21,13 @@ To remove docker containers: docker rm <container>
 ## docker ps - all running containers
 ## docker ps -a - all available containers
 ## docker images - all available images
+
+## MASTERMND NOTES
+- All Docker images have tags
+- Docker files can go into github while docker images go in a docker registry(similar to docker hub) and the registry can be private or public. Exampl: if you are freelance for a company and you can put the necessary docker images in a registry for them to use after your job is done.
+- Containers are not persistance, they are .....
+- Docker like VMs can be used to run and analyze viruses in isolation.
+
 ## Foreground vs background container
 A foreground container is a container that starts the process and attaches the console or your terminal to thE container's process/bash/terminal.So, a foreground container is a container that you can interact with in real time. Then you have background containers which are associated with deamons (like deamon scripts). If you sny yo interact with background container, **docker exec** may help temporaily allow you to run container terminal.The difference between foreground containers can be accessed right after it is started. 
 - The -v flag mounts a local container on the container
